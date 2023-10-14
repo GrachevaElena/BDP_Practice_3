@@ -1,0 +1,16 @@
+help
+hdfs dfs -ls /
+hdfs dfs -mkdir -p /user/mgpu/gea
+base64 /dev/urandom | head -c 10000000 > gea.txt
+ls -l gea.txt
+gzip -c gea.txt > gea.gz
+ls -l gea.gz
+hdfs dfs -copyFromLocal ./gea.* /user/mgpu/gea
+hdfs dfs -ls /user/mgpu/gea
+hdfs dfs -cat /user/mgpu/gea/gea.txt | head -n 5
+hdfs dfs -cat /user/mgpu/gea/gea.txt | tail -n 10
+hdfs dfs -cat /user/mgpu/gea/gea.gz | gunzip | head -n 5
+hdfs dfs -cp /user/mgpu/gea/gea.txt /user/mgpu/gea/Sat_Oct_14_2023_gea.txt
+hdfs dfs -ls /user/mgpu/gea
+hdfs dfs -rm -r -f /user/mgpu/gea
+hdfs dfs -ls /user/mgpu/gea
